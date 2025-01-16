@@ -23,6 +23,9 @@ export class FormBuilderComponent {
       required: required === 'true',
       label: label.trim()
     });
+    
+    // Update table immediately after adding element
+    document.querySelector('tbody')!.innerHTML = this.getTableRows();
   }
 
   generateHtml(): void {
