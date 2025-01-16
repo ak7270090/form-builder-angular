@@ -1,0 +1,53 @@
+<div>
+    <label for="name">Input Name</label>
+    <input type="text" id="name" #name>
+    <br>
+  
+    <label for="type">Input Type</label>
+    <select id="type" #type>
+      <option value="text">Text</option>
+      <option value="radio">Radio</option>
+      <option value="email">Email</option>
+      <option value="dropdown">Dropdown</option>
+      <option value="checkbox">Checkbox</option>
+      <option value="file">File</option>
+      <option value="number">Number</option>
+    </select>
+    <br>
+  
+    <label for="required">Required</label>
+    <select id="required" #required>
+      <option value="true">True</option>
+      <option value="false">False</option>
+    </select>
+    <br>
+  
+    <label for="label">Input Label</label>
+    <input type="text" id="label" #label>
+    <br>
+  
+    <button (click)="addElement(name.value, type.value, required.value, label.value)">Add Element</button>
+    <br>
+  </div>
+  
+  <h2>Table</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Required</th>
+        <th>Label</th>
+      </tr>
+    </thead>
+    <tbody [innerHTML]="getTableRows()"></tbody>
+  </table>
+  
+  
+  <button (click)="generateHtml()">Generate HTML</button>
+  
+  <div class="form-container">
+    <h2>Generated HTML</h2>
+    <textarea [value]="generatedHtml" readonly></textarea>
+  </div>
+  
