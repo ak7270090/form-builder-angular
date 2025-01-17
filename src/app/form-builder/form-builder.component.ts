@@ -1,37 +1,51 @@
 import { Component } from '@angular/core';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-form-builder',
   templateUrl: './form-builder.component.html',
-  styleUrls: ['./form-builder.component.css']
+  styleUrls: ['./form-builder.component.css'],
+  imports:[FormsModule]
 })
 export class FormBuilderComponent {
 
-  dynamicTable: any[] = [];  
+  dynamicTable: any[] = []; 
+  inputName: string = '';
+  inputType: string = 'text';
+  required: string = 'true';
+  inputLabel: string = '';
   
   generatedHtml = '';
 
-  addElement(name: string, type: string, required: string, label: string): void {
-    if (!name.trim() || !label.trim()) {
+  addElement(){
+    if (!this.inputName || !this.inputLabel) {
       alert('Name and Label are required.');
       return;
     }
+    
+    console.log(this.required);
 
     this.dynamicTable.push({
-      name: name.trim(),
-      type,
-      required: required === 'true',
-      label: label.trim()
+      name: this.inputName,
+      type: this.inputType,
+      required: this.required === 'true',
+      label: this.inputLabel,
     });
     
-    // Update table immediately after adding element
-    document.querySelector('tbody')!.innerHTML = this.getTableRows();
+    
+    this.inputName = '';
+    this.inputType = 'text';
+    this.required = '';
+    this.inputLabel = '';
+
+
   }
 
   generateHtml(): void {
     let formHtml = '<form>\n';
 
     this.dynamicTable.forEach(row => {
+      console.log(row);
       formHtml += `  <label for="${row.name}">${row.label}</label>\n`;
 
       if (row.type === 'dropdown') {
@@ -55,17 +69,6 @@ export class FormBuilderComponent {
     this.generatedHtml = formHtml;
   }
 
-  getTableRows(): string {
-    return this.dynamicTable.map((row, index) => {
-      return `
-        <tr>
-          <td>${row.name}</td>
-          <td>${row.type}</td>
-          <td>${row.required}</td>
-          <td>${row.label}</td>
-        </tr>
-      `;
-    }).join('');
-  }
+
   
 }
