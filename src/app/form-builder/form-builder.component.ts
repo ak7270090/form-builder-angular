@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import {FormsModule} from "@angular/forms";
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form-builder',
+  standalone: true,
   templateUrl: './form-builder.component.html',
   styleUrls: ['./form-builder.component.css'],
-  imports:[FormsModule]
+  imports:[CommonModule,FormsModule]
 })
 export class FormBuilderComponent {
 
@@ -16,6 +19,8 @@ export class FormBuilderComponent {
   inputLabel: string = '';
   
   generatedHtml = '';
+
+  constructor(private router:Router){};
 
   addElement(){
     if (!this.inputName || !this.inputLabel) {
@@ -41,7 +46,7 @@ export class FormBuilderComponent {
 
   }
 
-  generateHtml(): void {
+  generateHtml(){
     let formHtml = '<form>\n';
 
     this.dynamicTable.forEach(row => {
@@ -67,8 +72,15 @@ export class FormBuilderComponent {
 
     formHtml += '</form>';
     this.generatedHtml = formHtml;
+
+    return formHtml;
   }
 
+  previewHtml(){
+    const preview = this.generateHtml();
+    console.log('Generated HTML:', preview);
+    this.router.navigate(['/preview'], { state: { html: preview } });
+  }
 
   
 }

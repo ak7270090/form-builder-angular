@@ -1,15 +1,22 @@
-// import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
-// import { AppComponent } from './app.component';
-// import { FormBuilderComponent } from './form-builder/form-builder.component';  // Import FormBuilderComponent if used
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
+import { FormBuilderComponent } from './form-builder/form-builder.component';
+import { PreviewFormComponent} from './preview-form/preview-form.component';
+import { routes } from './app.routes';
 
-// @NgModule({
-//   imports: [
-//     BrowserModule,
-//     RouterModule.forRoot([]),  // <-- Add RouterModule with at least an empty route configuration
-//     AppComponent,
-//     FormBuilderComponent  // Ensure your FormBuilderComponent is declared here if needed
-//   ],
-//   bootstrap: [AppComponent]
-// })
-// export class AppModule { }
+@NgModule({
+  declarations: [
+    AppComponent,
+    FormBuilderComponent,
+    PreviewFormComponent,
+  ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}

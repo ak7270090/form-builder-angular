@@ -1,16 +1,15 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { FormBuilderComponent } from './form-builder/form-builder.component';  // Import FormBuilderComponent if used
-
+import { RouterModule } from '@angular/router';  
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',  // <-- Check the path here
+  standalone: true,
+  template: `
+    <router-outlet></router-outlet>  <!-- Router Outlet -->
+  `,
   styleUrls: ['./app.component.css'],
-  imports: [
-      FormBuilderComponent  // Ensure your FormBuilderComponent is declared here if needed
-    ],
+  imports: [RouterModule],  
 })
 export class AppComponent {
-  title = 'my-app';
 }
